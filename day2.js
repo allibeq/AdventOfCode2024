@@ -7,14 +7,14 @@ function getAndParseDayOneData() {
     reports = fileData.trim().split('\n');
 }
 
-function isSafe (report) {
+function isSafe(report) {
     const levels = report.split(' ').map((v) => Number(v));
 
     let isAsc = levels[0] < levels[1];
 
     for (let i = 0; i < levels.length - 1; i++) {
         if (levels[i] < levels[i + 1] && levels[i + 1] - levels[i] < 4 && isAsc) {
-           continue;
+            continue;
         } else if (levels[i] > levels[i + 1] && levels[i] - levels[i + 1] < 4 && !isAsc) {
             continue;
         } else {
@@ -25,14 +25,14 @@ function isSafe (report) {
     return true;
 }
 
-function isSafeWithDampener (report) {
+function isSafeWithDampener(report) {
     const levels = report.split(' ').map((v) => Number(v));
     let errCount = 0;
     let isAsc = levels[0] < levels[1];
 
     for (let i = 0; i < levels.length - 1; i++) {
         if (levels[i] < levels[i + 1] && levels[i + 1] - levels[i] < 4 && isAsc) {
-           continue;
+            continue;
         } else if (levels[i] > levels[i + 1] && levels[i] - levels[i + 1] < 4 && !isAsc) {
             continue;
         } else {
@@ -43,20 +43,20 @@ function isSafeWithDampener (report) {
             }
             if (-4 < levels[i - 1] - levels[i + 1] < 4) {
                 errCount++;
-                if(errCount > 1) {
+                if (errCount > 1) {
                     return false
                 }
             }
-        }        
+        }
     }
-    
+
     return true;
 }
 
-function day2Part1 () {
+function day2Part1() {
 
     let sum = 0;
-    
+
     for (let i = 0; i < reports.length; i++) {
         if (isSafe(reports[i])) {
             sum++;
@@ -65,9 +65,9 @@ function day2Part1 () {
     return sum;
 }
 
-function day2Part2 () {
+function day2Part2() {
     let sum = 0;
-    
+
     for (let i = 0; i < reports.length; i++) {
         if (isSafeWithDampener(reports[i])) {
             sum++;
